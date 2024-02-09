@@ -6,8 +6,8 @@ import { useNavigation } from "@react-navigation/native";
 const SettingsComp = ({ otherMenu, securityData, supportData }) => {
   const navigation = useNavigation();
   return (
-    <View className="flex-1 mt-5 bg-white p-6">
-      <View className=" mb-5 flex-row items-center">
+    <View className="flex-1  bg-white p-6">
+      <View className=" py-6 mb-5 flex-row items-center">
         <TouchableOpacity
           className="mr-4"
           onPress={() => {
@@ -45,13 +45,13 @@ const SettingsComp = ({ otherMenu, securityData, supportData }) => {
         </TouchableOpacity>
         <ScrollView
           showsVerticalScrollIndicator={false}
-          className=" h-[561px] mt-10"
+          className=" h-5/6 mt-10"
         >
           <View>
-            <Text className="text-[10px] font-[400] font-[Archivo] leading-[10px] mb-3">
+            <Text className="text-[10px] font-normal font-[Archivo] leading-[10px] mb-3">
               Other menu
             </Text>
-            <View className=" h-[274px] border-[.05px] p-3 shadow shadow-black/5 rounded-[10px] ">
+            <View className=" mx-1 h-auto bg-white p-3 shadow shadow-black/40 rounded-[10px]">
               {otherMenu.map((item, index) => (
                 <TouchableOpacity
                   className="flex-row justify-between items-center my-4"

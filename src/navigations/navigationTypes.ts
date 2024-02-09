@@ -6,6 +6,7 @@ export type AuthStackParamList = {
   VerifyAccountScreen: undefined;
   AccountCreatedScreen: undefined;
   GetStartedScreen: undefined;
+  
   //   ResetPassword: undefined;
 };
 
@@ -40,7 +41,7 @@ export type HomeStackParamList = {
   SendMoneySuccess: undefined;
   SendMoneyEnterPin: undefined;
   FundWalletComp: undefined;
-  BillsStackNavigation: { screen: any };
+  BillsStackNavigation: { screen: string, initial: boolean };
   BillsScreens: undefined;
   BuyDataComp: undefined;
   ReviewOrderComp: undefined;
@@ -84,6 +85,9 @@ export type HomeStackParamList = {
   RequestComp: undefined;
   RequestDriverAssign: undefined;
   RequestDriverSuccess: undefined;
+  TransactionPinScreen: undefined;
+  ReEnterPIN: undefined;
+  CreateWallet: undefined;
   //   CartScreen: { item: object };
 };
 

@@ -4,9 +4,9 @@ import LoginScreen from "../screens/AuthScreens/LoginScreen";
 import RegisterScreen from "../screens/AuthScreens/RegisterScreen";
 import OnboardingScreen from "../screens/AuthScreens/OnboardingScreen";
 import ForgotPasswordScreen from "../screens/AuthScreens/ForgotPasswordScreen";
-import VerifyAccountScreen from "../screens/AuthScreens/VerifyAccountScreen";
+import VerifyAccountScreen from "../components/authComp/RegisterComp/VerifyAccountScreen";
 import { AuthStackParamList } from "./navigationTypes";
-import AccountCreatedScreen from "../screens/AuthScreens/AccountCreatedScreen";
+import AccountCreatedScreen from "../components/authComp/RegisterComp/AccountCreatedScreen";
 import GetStartedScreen from "../screens/AuthScreens/OnboardingScreen/GetStartedScreen";
 // import ResetPasswordScreen from "../screens/AuthScreens/ResetPaswwordScreen";
 // import { AuthStackParamList } from "../types/navigations";
@@ -35,6 +35,7 @@ const AuthNavigation = ()=>{
           name="AccountCreatedScreen"
           component={AccountCreatedScreen}
         />
+    
 
         <AuthStack.Screen
           name="ForgotPassword"

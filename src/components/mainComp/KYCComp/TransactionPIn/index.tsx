@@ -8,12 +8,14 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from "react-native-confirmation-code-field";
+import useAuthStore from "../../../../stores/authStore";
 
-const CELL_COUNT = 6;
+const CELL_COUNT = 4;
 
-const VerifyAccountScreen = () => {
+const TransactionPinScreen = () => {
   const navigation = useNavigation();
   const [value, setValue] = React.useState("");
+  const [enableMask, setEnableMask] = React.useState(true);
   const [isFull, setIsFull] = React.useState(false);
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -21,11 +23,42 @@ const VerifyAccountScreen = () => {
     setValue,
   });
 
+  //STORE
+  const { setAuthDataInfo, authDataInfo } = useAuthStore((state) => ({
+    setAuthDataInfo: state.setAuthDataInfo,
+    authDataInfo: state.authDataInfo,
+  }));
+
   const handleFulfill = (code) => {
     if (code.length === CELL_COUNT) {
-      setIsFull(true);
-      navigation.navigate("AccountCreatedScreen");
+      // setIsFull(true);
+      setAuthDataInfo({  transactionPin: code });
+      // navigation.navigate("AccountCreatedScreen");
+      navigation.navigate("ReEnterPIN");
+      console.log("am here")
     }
+  };
+
+  const renderCell = ({ index, symbol, isFocused }) => {
+    const textChild = symbol ? (
+      enableMask ? (
+        "*"
+      ) : (
+        symbol
+      )
+    ) : isFocused ? (
+      <Cursor />
+    ) : null;
+
+    return (
+      <Text
+        key={index}
+        className="h-[50px] w-[50px]  bg-[#F5F5F5] rounded-[6px] text-center p-2 text-[24px]"
+        onLayout={getCellOnLayoutHandler(index)}
+      >
+        {textChild}
+      </Text>
+    );
   };
 
   return (
@@ -40,21 +73,22 @@ const VerifyAccountScreen = () => {
         </TouchableOpacity>
         <View className="mt-5 mb-10">
           <Text className="font-[Archivo] font-[700] text-[29px] leading-[37px]">
-            Verify account
+            Set PIN
           </Text>
           <Text className="font-[Archivo] font-[400] text-[12px] leading-[23px]">
-            A code has been sent to your email address
+            Set your transactional PIN here
           </Text>
         </View>
       </View>
       <View>
         <Text className="font-[Archivo] font-[400] text-[12px] leading-[13px] mb-2">
-          Enter code
+          Enter your desired PIN
         </Text>
         <CodeField
           ref={ref}
           {...props}
           value={value}
+          secureTextEntry={true}
           //   onChangeText={setValue}
           onChangeText={(code) => {
             setValue(code);
@@ -63,16 +97,19 @@ const VerifyAccountScreen = () => {
           cellCount={CELL_COUNT}
           //   rootStyle={styles.codeFiledRoot}
           keyboardType="number-pad"
-          renderCell={({ index, symbol, isFocused }) => (
-            <Text
-              key={index}
-              //   style={[styles.cell, isFocused && styles.focusCell]}
-              className="h-[50px] w-[50px]  bg-[#F5F5F5] rounded-[6px] text-center p-2 text-[24px]"
-              onLayout={getCellOnLayoutHandler(index)}
-            >
-              {symbol || (isFocused ? <Cursor /> : null)}
-            </Text>
-          )}
+          renderCell={renderCell}
+
+          // renderCell={({ index, symbol, isFocused }) => (
+          //   <Text
+          //     key={index}
+          //     //   style={[styles.cell, isFocused && styles.focusCell]}
+          //     // className="h-[50px] w-[50px]  bg-[#F5F5F5] rounded-[6px] text-center p-2 text-[24px]"
+          //     className="h-[50px] w-[50px]  bg-red-400 rounded-[6px] text-center p-2 text-[24px]"
+          //     onLayout={getCellOnLayoutHandler(index)}
+          //   >
+          //     {symbol || (isFocused ? <Cursor /> : null)}
+          //   </Text>
+          // )}
         />
       </View>
     </View>
@@ -96,4 +133,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VerifyAccountScreen;
+export default TransactionPinScreen;

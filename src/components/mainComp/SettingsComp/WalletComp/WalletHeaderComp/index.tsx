@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { FundWallet, SendMoney, TransactionsIcon } from "../../../../../helper/Icons";
+import { FundWallet, SendMoney, TransactionsIcon } from "../../../../../helper/CustomIcon/Icons";
 
 
 type HeaderDataType ={

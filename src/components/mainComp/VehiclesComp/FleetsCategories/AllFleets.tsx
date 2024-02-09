@@ -40,7 +40,7 @@ const AllFleets = () => {
             }}
           >
             <View className=" flex-row">
-              <View className=" w-[85px] h-[46px]">
+              <View className=" w-24 h-12 ">
                 <Image
                   source={require("../../../../../assets/images/car2.png")}
                   style={{

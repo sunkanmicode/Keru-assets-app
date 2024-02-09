@@ -3,8 +3,10 @@ import React from 'react'
 import { useNavigation } from "@react-navigation/native";
 import QuickLink from "../QuickLink";
 
-const AccountDetails = ({ quicklinkData, summaryData }) => {
-    const navigation = useNavigation()
+const AccountDetails = ({ quicklinkData, getDashboardQuery }) => {
+  const navigation = useNavigation();
+
+  
   return (
     <View>
       <View>
@@ -15,23 +17,40 @@ const AccountDetails = ({ quicklinkData, summaryData }) => {
 
       <View className="h-0.5 bg-[#F1F0F0] mt-4 mb-7" />
       <View className=" flex-row items-center justify-around mb-5">
-        {summaryData.map((item, index) => (
-          <View key={index} className=" ">
-            <Text className="text-[20px] font-[500] font-[SwitzerVariable] leading-[26px] text-[#007FFF] text-center mb-[8px]">
-              N{item.Amonut}
-            </Text>
-            <Text className="text-[10px] font-[400] font-[SwitzerVariable] leading-[13px] text-center">
-              {item.title}
-            </Text>
-          </View>
-        ))}
+        <View className=" ">
+          <Text className="text-[20px] font-[500] font-[SwitzerVariable] leading-[26px] text-[#007FFF] text-center mb-[8px]">
+            {getDashboardQuery?.data?.count?.stockOrder}
+          </Text>
+          <Text className="text-[10px] font-[400] font-[SwitzerVariable] leading-[13px] text-center">
+            Store Sales
+          </Text>
+        </View>
+
+        <View className=" ">
+          <Text className="text-[20px] font-[500] font-[SwitzerVariable] leading-[26px] text-[#007FFF] text-center mb-[8px]">
+            {getDashboardQuery?.data?.count?.vehicle}
+          </Text>
+          <Text className="text-[10px] font-[400] font-[SwitzerVariable] leading-[13px] text-center">
+            Total Vehicles
+          </Text>
+        </View>
+        <View className=" ">
+          <Text className="text-[20px] font-[500] font-[SwitzerVariable] leading-[26px] text-[#007FFF] text-center mb-[8px]">
+            {getDashboardQuery?.data?.count?.revenue}
+          </Text>
+          <Text className="text-[10px] font-[400] font-[SwitzerVariable] leading-[13px] text-center">
+            Revenue
+          </Text>
+        </View>
       </View>
       <View className=" flex-row items-center justify-between">
-        <Text className="text-[14px] font-[500] font-[SwitzerVariable] leading-[15.48px]">
-          My Fleets
+        <Text className="text-sm font-medium font-[SwitzerVariable] ">
+          Pending Fleet Orders
         </Text>
         <TouchableOpacity>
-          <Text>See all</Text>
+          <Text className="text-sm font-medium font-[SwitzerVariable]">
+            See all
+          </Text>
         </TouchableOpacity>
       </View>
       <View className="h-0.5 bg-[#F1F0F0] mt-4 mb-7" />
@@ -85,7 +104,7 @@ const AccountDetails = ({ quicklinkData, summaryData }) => {
           </TouchableOpacity>
         </View>
         <View className="h-0.5 bg-[#F1F0F0] mt-4 mb-7" />
-        <QuickLink quicklinkData={quicklinkData} />
+        <QuickLink />
       </View>
     </View>
   );

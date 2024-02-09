@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import CustomInput, { CustomButton } from "../../../../customsComp/Input";
 import CustomBottomSheet from "../../../../customsComp/BottomSheet";
 import FundWalletBottomSheet from "./FundWalletBottomSheet";
-import { PaystackIcon } from "../../../../../helper/Icons";
+import { PaystackIcon } from "../../../../../helper/CustomIcon/Icons";
 
 const FundWalletComp = () => {
     const navigation = useNavigation()

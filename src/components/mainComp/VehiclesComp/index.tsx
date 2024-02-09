@@ -69,7 +69,7 @@ const VehiclesComp = ({
           {categoriesIndex === 1 && <Drivers />}
         </View>
       </View>
-      <View className="px-4">
+      <View className=" bg-white p-4">
         {categoriesIndex == 0 && (
           <CustomButton
             primary

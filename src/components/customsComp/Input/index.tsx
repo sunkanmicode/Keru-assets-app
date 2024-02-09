@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
+  KeyboardTypeOptions,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 
@@ -24,7 +25,9 @@ type InputType = {
   keyboardType?: string;
   primary?: boolean;
   whiteBg?: boolean;
-  width?:number;
+  width?: number;
+  error?: string;
+  multiline?: boolean;
 };
 
 const CustomInput = ({
@@ -38,8 +41,10 @@ const CustomInput = ({
   keyboardType,
   primary,
   whiteBg,
-  // width,
-}: InputType) => {
+  error,
+  multiline,
+}: // width,
+InputType) => {
   const [focused, setFocused] = React.useState(false);
   // const width = 60
 
@@ -63,34 +68,41 @@ const CustomInput = ({
     if (whiteBg) return "bg-[#Ffff] border border-[#D3D3D3]";
   };
   return (
-    <View className="py-3">
-      {label && (
-        <Text className="mb-2 font-[400] text-[12px]  font-[Archivo] leading-[13]">
-          {label}
-        </Text>
-      )}
-      <View
-        className={`h-[50] rounded-lg    ${getBgColor()}  items-center px-3 ${getFlexDirection()}`}
-      >
-        <View>{icon && icon}</View>
-
-        <TextInput
-          secureTextEntry={secureTextEntry}
-          placeholder={placeholder}
-          keyboardType={keyboardType}
-          onBlur={() => {
-            setFocused(false);
-          }}
-          onFocus={() => {
-            setFocused(true);
-          }}
-          onChangeText={onChangeText}
-          value={value}
-          // style={{ backgroundColor: "blue" }}
-          className="flex-1 h-11 px-2 "
-        />
+    <>
+      <View className="py-1">
+        {label && (
+          <Text className="mb-2 font-[400] text-[12px]  font-[Archivo] leading-[13]">
+            {label}
+          </Text>
+        )}
+        <View
+          className={`h-[50] rounded-lg ${getBgColor()}  items-center px-3 ${getFlexDirection()}`}
+        >
+          <View>{icon && icon}</View>
+          <TextInput
+            secureTextEntry={secureTextEntry}
+            placeholder={placeholder}
+            keyboardType={keyboardType as KeyboardTypeOptions}
+            onBlur={() => {
+              setFocused(false);
+            }}
+            onFocus={() => {
+              setFocused(true);
+            }}
+            onChangeText={onChangeText}
+            value={value}
+            // style={{ backgroundColor: "blue" }}
+            className="flex-1 h-11 px-2 "
+          />
+        </View>
+        {error && (
+          <Text className=" text-red-300 font-[400] text-xs  font-[SwitzerVariable]">
+            {error}
+          </Text>
+        )}
       </View>
-    </View>
+      {/* {multiline && <Text>Hello</Text>} */}
+    </>
   );
 };
 

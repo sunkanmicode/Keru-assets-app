@@ -8,7 +8,7 @@ import {
   Image,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { VehicleIcon } from "../../../helper/Icons";
+import { VehicleIcon } from "../../../helper/CustomIcon/Icons";
 import { Feather } from "@expo/vector-icons";
 import HomeHeaderComp from "./HomeHeaderComp";
 import QuickLink from "./QuickLink";
@@ -17,39 +17,36 @@ import HomeBottomSheet from "./HomeBottomSheet";
 import { useNavigation } from "@react-navigation/native";
 import AccountDetails from "./HomeCatgegories/AccountDetails";
 import Analytics from "./HomeCatgegories/Analytics";
+import WalletSetModal from "./WalletSetModel";
 
-const HomeComp = ({ quicklinkData, sheetRef, openSheet, height }) => {
+const HomeComp = ({
+  quicklinkData,
+  sheetRef,
+  openSheet,
+  height,
+  visible,
+  setVisible,
+  getUserInfoQuery,
+  getDashboardQuery,
+}) => {
   const navigation = useNavigation();
   const [categoriesIndex, setCategoriesIndex] = React.useState(0);
 
-
-  const summaryData = [
-    {
-      Amonut: "1000",
-      title: "Store Sales",
-    },
-    {
-      Amonut: "1000",
-      title: "Total Vehicles",
-    },
-    {
-      Amonut: "12000",
-      title: "Revenue",
-    },
-  ];
   return (
     <>
+      <WalletSetModal visible={visible} setVisible={setVisible} />
+
       <View className="flex-1 bg-black">
         <HomeHeaderComp
           categoriesIndex={categoriesIndex}
           setCategoriesIndex={setCategoriesIndex}
+          getUserInfoQuery={getUserInfoQuery}
         />
         <ScrollView className="bg-white p-6">
-          
           {categoriesIndex === 0 && (
             <AccountDetails
               quicklinkData={quicklinkData}
-              summaryData={summaryData}
+              getDashboardQuery={getDashboardQuery}
             />
           )}
           {categoriesIndex === 1 && <Analytics />}

@@ -39,6 +39,10 @@ import FleetOrderComp from "../../components/mainComp/SettingsComp/RequestComp";
 import RequestComp from "../../components/mainComp/SettingsComp/RequestComp";
 import RequestDriverAssign from "../../components/mainComp/SettingsComp/RequestComp/RequestDriverAssign";
 import RequestDriverSuccess from "../../components/mainComp/SettingsComp/RequestComp/RequestDriverSuccess";
+import TransactionPinScreen from "../../components/mainComp/KYCComp/TransactionPIn";
+import ReEnterPIN from "../../components/mainComp/KYCComp/TransactionPIn/ReEnterPIN";
+import WalletSetModal from "../../components/mainComp/HomeComp/WalletSetModel";
+import CreateWallet from "../../components/mainComp/KYCComp/CreateWallet";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -194,6 +198,27 @@ const HomeStackNavigation = () => {
         <HomeStack.Screen
           name="RequestDriverSuccess"
           component={RequestDriverSuccess}
+          options={{ headerShown: false }}
+        />
+        <HomeStack.Screen
+          name="TransactionPinScreen"
+          component={TransactionPinScreen}
+          options={{ headerShown: false }}
+        />
+        <HomeStack.Screen
+          name="ReEnterPIN"
+          component={ReEnterPIN}
+          options={{ headerShown: false }}
+        />
+        <HomeStack.Screen
+          name="CreateWallet"
+          component={CreateWallet}
+          options={{ headerShown: false }}
+        />
+
+        <HomeStack.Screen
+          name="WalletSetModal"
+          component={WalletSetModal}
           options={{ headerShown: false }}
         />
       </HomeStack.Group>

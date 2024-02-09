@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import React from "react";
 import SettingsComp from "../../../components/mainComp/SettingsComp";
 import {
@@ -9,6 +9,8 @@ import {
 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import useAuthStore from "../../../stores/authStore";
+import Toast from "react-native-toast-message";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type settingsType = {
   icon: React.ReactNode;
@@ -20,7 +22,41 @@ type settingsType = {
 
 const SettingsScreen = () => {
   const navigation = useNavigation();
-  const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
+  const { setIsLoggedIn, setAuthUser, isLoggedIn, authUser } = useAuthStore(
+    (state) => ({
+      setIsLoggedIn: state.setIsLoggedIn,
+      setAuthUser: state.setAuthUser,
+      isLoggedIn: state.isLoggedIn,
+      authUser: state.authUser,
+    })
+  );
+
+  console.log(isLoggedIn, authUser, "isLoggedIn");
+
+  //LOG OUT LOGIC
+  const handleLogout = async () => {
+    console.log("click me");
+    Alert.alert("Logout!", "Are you sure you want to logout?", [
+      {
+        text: "Cancel",
+        onPress: () => {},
+      },
+      {
+        text: "Ok",
+        onPress: async () => {
+          Toast.show({
+            type: "success",
+            text2: "You have logged out",
+          });
+          await AsyncStorage.removeItem("token");
+          setIsLoggedIn(false);
+          setAuthUser(null);
+
+          console.log("removed");
+        },
+      },
+    ]);
+  };
 
   const otherMenu: settingsType = [
     {
@@ -115,7 +151,8 @@ const SettingsScreen = () => {
       desc: "You have virtual accounts created for you",
       nextIcon: <Ionicons name="chevron-forward" size={20} color="black" />,
       onPress: () => {
-        setIsLoggedIn(false);
+          handleLogout();
+          console.log("logged out");
       },
     },
   ];

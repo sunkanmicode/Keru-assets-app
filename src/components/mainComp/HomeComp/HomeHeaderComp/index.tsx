@@ -4,7 +4,11 @@ import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const HomeHeaderComp = ({ categoriesIndex, setCategoriesIndex }) => {
+const HomeHeaderComp = ({
+  categoriesIndex,
+  setCategoriesIndex,
+  getUserInfoQuery,
+}) => {
   const navigation = useNavigation();
 
   const categoriesData = [
@@ -42,7 +46,7 @@ const HomeHeaderComp = ({ categoriesIndex, setCategoriesIndex }) => {
                 Welcome
               </Text>
               <Text className="text-[10px] text-white font-[400] font-[Archivo] leading-[10px]">
-                Jane
+                {getUserInfoQuery?.first_name} 
               </Text>
             </View>
           </TouchableOpacity>

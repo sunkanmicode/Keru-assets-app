@@ -4,8 +4,12 @@ import * as SplashScreen from "expo-splash-screen";
 import AppNavigation from "./src/navigations";
 import { useFonts } from "expo-font";
 import Toast from "react-native-toast-message";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { toastConfig } from "./src/components/customsComp/CustomToast";
 
 SplashScreen.preventAutoHideAsync();
+const queryClient = new QueryClient();
+
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -29,9 +33,11 @@ export default function App() {
   }
   return (
     <>
-      <AppNavigation />
-      <StatusBar style="auto" />
-      <Toast />
+      <QueryClientProvider client={queryClient}>
+        <AppNavigation />
+        <Toast config={toastConfig} />
+        <StatusBar style="auto" />
+      </QueryClientProvider>
     </>
   );
 }
